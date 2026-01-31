@@ -1,0 +1,89 @@
+{
+  "navigation": {
+    "main": [],
+    "footer": [],
+    "cta": {
+      "label": "お問い合わせ",
+      "href": "/contact"
+    }
+  },
+  "company": {
+    "name": "",
+    "nameShort": "",
+    "nameEn": "",
+    "id": "",
+    "ceo": "",
+    "established": "",
+    "capital": "",
+    "revenue": "",
+    "employees": "",
+    "business": "",
+    "license": "",
+    "catchphrase": "",
+    "mission": ""
+  },
+  "contact": {
+    "phone": "",
+    "phoneFormatted": "",
+    "phoneTel": "",
+    "fax": "",
+    "email": "",
+    "hours": "",
+    "recruitContact": ""
+  },
+  "locations": {
+    "headquarters": {
+      "name": "本社",
+      "zipCode": "",
+      "address": "",
+      "access": "",
+      "mapUrl": ""
+    },
+    "branches": []
+  },
+  "social": {
+    "instagram": ""
+  },
+  "images": {
+    "logo": "/images/logo.png",
+    "logoSquare": "/images/logo-square.png",
+    "logoOnly": "/images/logo-only.png"
+  },
+  "seo": {
+    "titleSuffix": "",
+    "defaultTitle": "",
+    "defaultDescription": ""
+  },
+  "stats": {
+    "yearsInBusiness": "",
+    "projectsCompleted": "",
+    "employees": "",
+    "retentionRate": ""
+  },
+  "history": [],
+  "services": [],
+  "works": [],
+  "news": [],
+  "recruit": {
+    "catchphrase": "",
+    "subCatchphrase": "",
+    "data": [],
+    "benefits": {
+      "vacation": [],
+      "allowances": [],
+      "facilities": []
+    },
+    "positions": {
+      "highSchool": { "title": "", "items": [] },
+      "midCareer": { "title": "", "items": [] }
+    },
+    "faq": [],
+    "interviews": []
+  },
+  "ceo": {
+    "name": "",
+    "title": "",
+    "image": "",
+    "message": []
+  }
+}
