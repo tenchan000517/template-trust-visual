@@ -1,89 +1,439 @@
 {
+  "site": {
+    "name": "株式会社サンプル製作所",
+    "description": "精密部品の製造・加工を行う会社です。創業35年の実績と、523社以上のお取引先様からの信頼をいただいております。",
+    "url": "https://example.com",
+    "locale": "ja_JP",
+    "template": "trust-visual"
+  },
+
+  "branding": {
+    "logo": "/images/logo.svg",
+    "logoAlt": "株式会社サンプル製作所",
+    "favicon": "/favicon.ico",
+    "ogImage": "/images/og-image.jpg"
+  },
+
+  "colors": {
+    "main": "#1e3a2f",
+    "accent": "#c45c3e",
+    "background": "#ffffff",
+    "backgroundAlt": "#f8f8f8",
+    "text": "#1e3a2f",
+    "textSub": "#6b7280"
+  },
+
+  "contact": {
+    "phone": "03-1234-5678",
+    "phoneFormatted": "03-1234-5678",
+    "phoneTel": "0312345678",
+    "fax": "03-1234-5679",
+    "email": "info@example.com",
+    "hours": "平日 9:00〜18:00",
+    "address": {
+      "postalCode": "123-4567",
+      "prefecture": "東京都",
+      "city": "品川区",
+      "street": "大崎1-2-3",
+      "building": "サンプルビル5F"
+    },
+    "googleMapsEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3242.123456789!2d139.123456!3d35.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDA3JzI0LjQiTiAxMznCsDA3JzI0LjQiRQ!5e0!3m2!1sja!2sjp!4v1234567890"
+  },
+
+  "social": {
+    "twitter": "",
+    "facebook": "",
+    "instagram": "",
+    "linkedin": "",
+    "youtube": ""
+  },
+
   "navigation": {
-    "main": [],
-    "footer": [],
-    "cta": {
+    "header": [
+      { "label": "TOP", "href": "/" },
+      { "label": "選ばれる理由", "href": "/why" },
+      { "label": "実績紹介", "href": "/works" },
+      { "label": "お客様の声", "href": "/voice" },
+      { "label": "サービス", "href": "/service" },
+      { "label": "会社概要", "href": "/about" }
+    ],
+    "footer": [
+      { "label": "TOP", "href": "/" },
+      { "label": "選ばれる理由", "href": "/why" },
+      { "label": "実績紹介", "href": "/works" },
+      { "label": "お客様の声", "href": "/voice" },
+      { "label": "サービス", "href": "/service" },
+      { "label": "会社概要", "href": "/about" },
+      { "label": "お問い合わせ", "href": "/contact" },
+      { "label": "プライバシーポリシー", "href": "/privacy" }
+    ],
+    "ctaButton": {
       "label": "お問い合わせ",
       "href": "/contact"
     }
   },
+
+  "trustVisual": {
+    "stats": [
+      {
+        "id": "clients",
+        "number": 523,
+        "unit": "社",
+        "label": "取引実績",
+        "displayOrder": 1
+      },
+      {
+        "id": "years",
+        "number": 35,
+        "unit": "年",
+        "label": "創業からの歴史",
+        "displayOrder": 2
+      },
+      {
+        "id": "satisfaction",
+        "number": 98.2,
+        "unit": "%",
+        "label": "お客様満足度",
+        "decimals": 1,
+        "displayOrder": 3
+      },
+      {
+        "id": "deliveries",
+        "number": 12000,
+        "unit": "件",
+        "label": "累計納品数",
+        "displayOrder": 4
+      }
+    ],
+
+    "clientLogos": {
+      "heading": "お取引先企業",
+      "note": "他、500社以上の企業様とお取引しています",
+      "logos": [
+        { "id": "client-001", "src": "/images/logos/client-1.svg", "alt": "大手メーカーA社", "displayOrder": 1 },
+        { "id": "client-002", "src": "/images/logos/client-2.svg", "alt": "大手メーカーB社", "displayOrder": 2 },
+        { "id": "client-003", "src": "/images/logos/client-3.svg", "alt": "大手メーカーC社", "displayOrder": 3 },
+        { "id": "client-004", "src": "/images/logos/client-4.svg", "alt": "大手メーカーD社", "displayOrder": 4 },
+        { "id": "client-005", "src": "/images/logos/client-5.svg", "alt": "大手メーカーE社", "displayOrder": 5 },
+        { "id": "client-006", "src": "/images/logos/client-6.svg", "alt": "大手メーカーF社", "displayOrder": 6 },
+        { "id": "client-007", "src": "/images/logos/client-7.svg", "alt": "大手メーカーG社", "displayOrder": 7 },
+        { "id": "client-008", "src": "/images/logos/client-8.svg", "alt": "大手メーカーH社", "displayOrder": 8 }
+      ],
+      "infiniteScroll": false
+    },
+
+    "reasons": [
+      {
+        "id": "reason-001",
+        "number": "01",
+        "title": "35年の経験と実績",
+        "image": "/images/reasons/reason-01.jpg",
+        "description": "1989年の創業以来、35年にわたりお客様のご要望にお応えしてまいりました。長年培った技術と経験で、どんな難題にも柔軟に対応いたします。",
+        "evidence": [
+          { "number": 35, "unit": "年", "label": "創業からの歴史" },
+          { "number": 12000, "unit": "件+", "label": "累計納品実績" },
+          { "number": 85, "unit": "%", "label": "リピート率" }
+        ],
+        "certifications": [],
+        "displayOrder": 1
+      },
+      {
+        "id": "reason-002",
+        "number": "02",
+        "title": "徹底した品質管理",
+        "image": "/images/reasons/reason-02.jpg",
+        "description": "ISO9001認証を取得し、体系的な品質管理体制を構築しています。全数検査を基本とし、不良率0.01%以下を維持し続けています。",
+        "evidence": [
+          { "number": 0.01, "unit": "%以下", "label": "不良率" },
+          { "number": 100, "unit": "%", "label": "全数検査" },
+          { "number": 3, "unit": "名", "label": "専任検査員" }
+        ],
+        "certifications": [
+          { "src": "/images/certifications/iso9001.png", "alt": "ISO9001" }
+        ],
+        "displayOrder": 2
+      },
+      {
+        "id": "reason-003",
+        "number": "03",
+        "title": "迅速・柔軟な対応",
+        "image": "/images/reasons/reason-03.jpg",
+        "description": "お問い合わせには24時間以内に回答いたします。緊急のご依頼にも可能な限りお応えし、お客様のビジネスをサポートいたします。",
+        "evidence": [
+          { "number": 24, "unit": "時間以内", "label": "お問い合わせ回答" },
+          { "number": 3, "unit": "日〜", "label": "最短納期" },
+          { "number": 95, "unit": "%", "label": "緊急対応成功率" }
+        ],
+        "certifications": [],
+        "displayOrder": 3
+      }
+    ],
+
+    "works": {
+      "heading": "実績紹介",
+      "subHeading": "お客様のご要望に応じた、多様な実績をご紹介します。",
+      "stats": [
+        { "number": 12000, "unit": "件+", "label": "累計納品実績" },
+        { "number": 50, "unit": "業種+", "label": "対応業種数" },
+        { "number": 800, "unit": "件/年", "label": "年間納品数" }
+      ],
+      "categories": [
+        { "id": "all", "label": "すべて" },
+        { "id": "manufacturing", "label": "製造業" },
+        { "id": "construction", "label": "建設業" },
+        { "id": "food", "label": "食品業" },
+        { "id": "retail", "label": "小売業" },
+        { "id": "other", "label": "その他" }
+      ],
+      "items": [
+        { "id": "work-001", "image": "/images/works/work-01.jpg", "title": "A社様 精密部品製造", "category": "manufacturing", "year": 2024, "featured": true },
+        { "id": "work-002", "image": "/images/works/work-02.jpg", "title": "B社様 設備部品加工", "category": "manufacturing", "year": 2024, "featured": true },
+        { "id": "work-003", "image": "/images/works/work-03.jpg", "title": "C社様 建設資材製造", "category": "construction", "year": 2024, "featured": true },
+        { "id": "work-004", "image": "/images/works/work-04.jpg", "title": "D社様 食品機械部品", "category": "food", "year": 2024, "featured": true },
+        { "id": "work-005", "image": "/images/works/work-05.jpg", "title": "E社様 店舗什器製作", "category": "retail", "year": 2024, "featured": true },
+        { "id": "work-006", "image": "/images/works/work-06.jpg", "title": "F社様 特注部品製造", "category": "other", "year": 2024, "featured": true },
+        { "id": "work-007", "image": "/images/works/work-07.jpg", "title": "G社様 量産部品加工", "category": "manufacturing", "year": 2023, "featured": false },
+        { "id": "work-008", "image": "/images/works/work-08.jpg", "title": "H社様 試作品製作", "category": "manufacturing", "year": 2023, "featured": false },
+        { "id": "work-009", "image": "/images/works/work-09.jpg", "title": "I社様 治工具製作", "category": "manufacturing", "year": 2023, "featured": false }
+      ]
+    },
+
+    "testimonials": {
+      "heading": "お客様の声",
+      "satisfaction": {
+        "number": 98.2,
+        "unit": "%",
+        "label": "お客様満足度",
+        "source": "2024年 お客様アンケート結果より"
+      },
+      "satisfactionBreakdown": [
+        { "label": "品質満足度", "percentage": 98 },
+        { "label": "納期満足度", "percentage": 96 },
+        { "label": "対応満足度", "percentage": 99 },
+        { "label": "再依頼意向", "percentage": 95 }
+      ],
+      "items": [
+        {
+          "id": "voice-001",
+          "photo": "/images/customers/customer-01.jpg",
+          "company": "株式会社山田製作所",
+          "position": "代表取締役",
+          "name": "山田太郎",
+          "since": "2020年からお取引",
+          "interview": {
+            "challenge": "以前の取引先では納期の遅れが頻繁にあり、生産計画に支障をきたしていました。品質にもばらつきがあり、検品に多くの時間を費やしていました。",
+            "reason": "知人からの紹介でサンプル製作所さんを知りました。実績と品質管理体制の説明を受け、信頼できると感じてお願いすることにしました。",
+            "effect": "納期通りの納品が当たり前になり、生産計画が安定しました。品質も非常に高く、検品時間が大幅に削減されました。",
+            "quote": "安心して任せられるパートナーです。品質と納期の両方を満たしてくれる会社はなかなかありません。"
+          },
+          "featured": true,
+          "displayOrder": 1
+        },
+        {
+          "id": "voice-002",
+          "photo": "/images/customers/customer-02.jpg",
+          "company": "田中工業株式会社",
+          "position": "製造部長",
+          "name": "田中一郎",
+          "since": "2018年からお取引",
+          "interview": {
+            "challenge": "小ロットの特注品を受けてくれる業者がなかなか見つからず、困っていました。",
+            "reason": "サンプル製作所さんは1個からでも対応してくれるということで、試しにお願いしてみました。",
+            "effect": "小ロットでも丁寧に対応していただき、試作から量産まで一貫してお任せできるようになりました。",
+            "quote": "小ロットでも大ロットでも同じ品質で対応してくれる、頼りになるパートナーです。"
+          },
+          "featured": true,
+          "displayOrder": 2
+        },
+        {
+          "id": "voice-003",
+          "photo": "/images/customers/customer-03.jpg",
+          "company": "鈴木電機株式会社",
+          "position": "購買課長",
+          "name": "鈴木花子",
+          "since": "2019年からお取引",
+          "interview": {
+            "challenge": "急な仕様変更や追加発注への対応が必要な場面が多く、柔軟に対応してくれる取引先を探していました。",
+            "reason": "24時間以内の返答と迅速な対応という評判を聞いて、相談させていただきました。",
+            "effect": "急な変更にも迅速に対応していただき、当社の製品開発スピードが向上しました。",
+            "quote": "スピード感のある対応で、私たちの開発をサポートしてくれています。"
+          },
+          "featured": true,
+          "displayOrder": 3
+        }
+      ]
+    },
+
+    "certifications": [
+      {
+        "id": "cert-001",
+        "image": "/images/certifications/iso9001.png",
+        "name": "ISO9001",
+        "note": "2010年取得",
+        "displayOrder": 1
+      },
+      {
+        "id": "cert-002",
+        "image": "/images/certifications/iso14001.png",
+        "name": "ISO14001",
+        "note": "2015年取得",
+        "displayOrder": 2
+      }
+    ],
+
+    "services": {
+      "heading": "サービス",
+      "description": "お客様のニーズに合わせた多様なサービスを提供しています。",
+      "items": [
+        {
+          "id": "service-001",
+          "name": "精密加工",
+          "image": "/images/services/service-01.jpg",
+          "description": "高精度な精密加工を提供します。±0.01mmの精度を実現し、多品種少量から大量生産まで対応いたします。",
+          "features": [
+            "精度±0.01mm",
+            "24時間対応可能",
+            "小ロット1個から対応"
+          ],
+          "stats": [
+            { "number": 500, "unit": "件/年", "label": "年間対応件数" }
+          ],
+          "displayOrder": 1
+        },
+        {
+          "id": "service-002",
+          "name": "試作品製作",
+          "image": "/images/services/service-02.jpg",
+          "description": "設計段階からのご相談に対応し、試作品の製作をサポートいたします。図面がない段階でもご相談ください。",
+          "features": [
+            "図面なしでも相談可能",
+            "設計アドバイス対応",
+            "最短3日で納品"
+          ],
+          "stats": [
+            { "number": 200, "unit": "件/年", "label": "年間試作件数" }
+          ],
+          "displayOrder": 2
+        },
+        {
+          "id": "service-003",
+          "name": "量産加工",
+          "image": "/images/services/service-03.jpg",
+          "description": "安定した品質で量産加工を行います。生産計画に合わせた納品スケジュールで、お客様の製造ラインをサポートします。",
+          "features": [
+            "月間10,000個以上対応可能",
+            "定期納品対応",
+            "在庫管理サービスあり"
+          ],
+          "stats": [
+            { "number": 300, "unit": "件/年", "label": "年間量産件数" }
+          ],
+          "displayOrder": 3
+        }
+      ],
+      "coverage": {
+        "heading": "対応範囲",
+        "items": [
+          { "title": "対応エリア", "content": "全国対応（離島を除く）" },
+          { "title": "対応業種", "content": "製造業、建設業、食品業、小売業 他" },
+          { "title": "対応規模", "content": "試作1個から月間10,000個以上の量産まで" }
+        ]
+      },
+      "pricing": {
+        "heading": "料金・納期の目安",
+        "items": [
+          { "service": "精密加工", "price": "¥5,000〜", "leadTime": "5営業日〜" },
+          { "service": "試作品製作", "price": "¥10,000〜", "leadTime": "3営業日〜" },
+          { "service": "量産加工", "price": "個別見積もり", "leadTime": "納期相談" }
+        ],
+        "note": "※ 上記は目安です。詳細はお見積もりにてご案内いたします。お見積もりは無料です。"
+      }
+    }
+  },
+
   "company": {
-    "name": "",
-    "nameShort": "",
-    "nameEn": "",
-    "id": "",
-    "ceo": "",
-    "established": "",
-    "capital": "",
-    "revenue": "",
-    "employees": "",
-    "business": "",
-    "license": "",
-    "catchphrase": "",
-    "mission": ""
-  },
-  "contact": {
-    "phone": "",
-    "phoneFormatted": "",
-    "phoneTel": "",
-    "fax": "",
-    "email": "",
-    "hours": "",
-    "recruitContact": ""
-  },
-  "locations": {
-    "headquarters": {
-      "name": "本社",
-      "zipCode": "",
-      "address": "",
-      "access": "",
-      "mapUrl": ""
+    "heroImage": "/images/exterior.jpg",
+    "info": [
+      { "label": "会社名", "value": "株式会社サンプル製作所" },
+      { "label": "代表者", "value": "代表取締役 山田一郎" },
+      { "label": "設立", "value": "1989年4月1日" },
+      { "label": "資本金", "value": "3,000万円" },
+      { "label": "従業員数", "value": "45名（2024年4月現在）" },
+      { "label": "所在地", "value": "〒123-4567 東京都品川区大崎1-2-3 サンプルビル5F" },
+      { "label": "電話番号", "value": "03-1234-5678" },
+      { "label": "FAX番号", "value": "03-1234-5679" },
+      { "label": "営業時間", "value": "平日 9:00〜18:00" },
+      { "label": "事業内容", "value": "精密部品の製造・加工" },
+      { "label": "取引銀行", "value": "〇〇銀行 品川支店" },
+      { "label": "主要取引先", "value": "大手メーカーA社、B社、C社 他500社以上" }
+    ],
+    "ceoMessage": {
+      "heading": "代表メッセージ",
+      "photo": "/images/ceo.jpg",
+      "message": "弊社は1989年の創業以来、「品質第一、納期厳守」をモットーに、お客様のものづくりをサポートしてまいりました。\n\n35年の歴史の中で培った技術と経験を活かし、お客様のあらゆるご要望にお応えいたします。\n\n小ロットの試作品から大量生産まで、どんなご相談もまずはお聞かせください。お客様のビジネスの成功に貢献できるよう、社員一同全力で取り組んでまいります。",
+      "title": "代表取締役",
+      "name": "山田 一郎"
     },
-    "branches": []
+    "access": {
+      "heading": "アクセス",
+      "directions": [
+        { "method": "電車", "detail": "JR山手線・りんかい線「大崎駅」徒歩5分" },
+        { "method": "バス", "detail": "都営バス「大崎駅前」停留所 徒歩2分" },
+        { "method": "駐車場", "detail": "あり（10台分、要予約）" }
+      ]
+    }
   },
-  "social": {
-    "instagram": ""
-  },
-  "images": {
-    "logo": "/images/logo.png",
-    "logoSquare": "/images/logo-square.png",
-    "logoOnly": "/images/logo-only.png"
-  },
+
   "seo": {
-    "titleSuffix": "",
-    "defaultTitle": "",
-    "defaultDescription": ""
+    "titleSuffix": " | 株式会社サンプル製作所",
+    "defaultTitle": "株式会社サンプル製作所 | 精密部品製造のプロフェッショナル",
+    "defaultDescription": "創業35年、523社以上の取引実績。精密部品の製造・加工なら株式会社サンプル製作所へ。お客様満足度98.2%、品質と納期でお応えします。",
+    "pages": {
+      "top": {
+        "title": "株式会社サンプル製作所 | 精密部品製造のプロフェッショナル",
+        "description": "創業35年、523社以上の取引実績。精密部品の製造・加工なら株式会社サンプル製作所へ。お客様満足度98.2%、品質と納期でお応えします。"
+      },
+      "why": {
+        "title": "選ばれる理由",
+        "description": "なぜ523社以上の企業様に選ばれているのか。35年の実績と信頼、徹底した品質管理、迅速な対応が当社の強みです。"
+      },
+      "works": {
+        "title": "実績紹介",
+        "description": "累計12,000件以上の納品実績。製造業、建設業、食品業など50業種以上のお客様にご利用いただいています。"
+      },
+      "voice": {
+        "title": "お客様の声",
+        "description": "お客様満足度98.2%。実際にご利用いただいたお客様からの声をご紹介します。"
+      },
+      "service": {
+        "title": "サービス",
+        "description": "精密加工、試作品製作、量産加工など、お客様のニーズに合わせた多様なサービスを提供しています。"
+      },
+      "about": {
+        "title": "会社概要",
+        "description": "株式会社サンプル製作所の会社情報。1989年創業、従業員45名。ISO9001・ISO14001認証取得。"
+      },
+      "contact": {
+        "title": "お問い合わせ",
+        "description": "お見積もり・ご相談は無料です。お気軽にお問い合わせください。24時間以内にご返答いたします。"
+      }
+    }
   },
-  "stats": {
-    "yearsInBusiness": "",
-    "projectsCompleted": "",
-    "employees": "",
-    "retentionRate": ""
-  },
-  "history": [],
-  "services": [],
-  "works": [],
-  "news": [],
-  "recruit": {
-    "catchphrase": "",
-    "subCatchphrase": "",
-    "data": [],
-    "benefits": {
-      "vacation": [],
-      "allowances": [],
-      "facilities": []
+
+  "cta": {
+    "heading": "まずは、お気軽にご相談ください。",
+    "subText": "お見積もり・ご相談は無料です。24時間以内にご返答いたします。",
+    "primaryButton": {
+      "label": "お問い合わせ",
+      "href": "/contact"
     },
-    "positions": {
-      "highSchool": { "title": "", "items": [] },
-      "midCareer": { "title": "", "items": [] }
+    "secondaryButton": {
+      "label": "実績を見る",
+      "href": "/works"
     },
-    "faq": [],
-    "interviews": []
-  },
-  "ceo": {
-    "name": "",
-    "title": "",
-    "image": "",
-    "message": []
+    "phone": {
+      "number": "03-1234-5678",
+      "hours": "平日 9:00〜18:00"
+    }
   }
 }

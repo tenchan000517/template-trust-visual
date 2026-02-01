@@ -1,6 +1,4 @@
 import { ImageResponse } from "next/og";
-import { readFile } from "fs/promises";
-import { join } from "path";
 
 export const runtime = "nodejs";
 export const alt = "中部建設株式会社";
@@ -11,10 +9,6 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  const logoPath = join(process.cwd(), "public/images/中部建設ロゴ.png");
-  const logoData = await readFile(logoPath);
-  const logoBase64 = `data:image/png;base64,${logoData.toString("base64")}`;
-
   return new ImageResponse(
     (
       <div
@@ -22,19 +16,31 @@ export default async function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#ffffff",
+          backgroundColor: "#1e3a2f",
+          color: "#ffffff",
+          fontFamily: "sans-serif",
         }}
       >
-        <img
-          src={logoBase64}
-          alt="中部建設株式会社"
+        <div
           style={{
-            width: 500,
-            height: "auto",
+            fontSize: 72,
+            fontWeight: 700,
+            marginBottom: 24,
           }}
-        />
+        >
+          中部建設株式会社
+        </div>
+        <div
+          style={{
+            fontSize: 32,
+            color: "#c45c3e",
+          }}
+        >
+          確かな技術と誠実な対応で、信頼を築く
+        </div>
       </div>
     ),
     {

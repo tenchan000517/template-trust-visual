@@ -3,9 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { company, contact, images, navigation } from "@/lib/site";
+import { siteInfo, branding, contact, navigation } from "@/lib/site";
 
-// ナビゲーションはsite.jsonから読み込み（構成案に基づいてClaude Codeが設定）
 const navItems = navigation.main;
 const ctaButton = navigation.cta;
 
@@ -37,7 +36,7 @@ export default function Header() {
     <>
       {/* PC Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-[1000] h-20 transition-all duration-300 ${
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-[1000] h-20 transition-all duration-300 ${
           isScrolled ? "bg-white shadow-header" : "bg-transparent"
         }`}
       >
@@ -45,8 +44,8 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src={images.logo || "/images/logo.png"}
-              alt={company.name || "会社ロゴ"}
+              src={branding.logo || "/images/logo.svg"}
+              alt={branding.logoAlt || siteInfo.name}
               width={220}
               height={55}
               className={`transition-all duration-300 ${
@@ -56,53 +55,27 @@ export default function Header() {
           </Link>
 
           {/* PC Navigation */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="flex items-center gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`text-[15px] transition-colors duration-200 hover:text-accent ${
-                  isScrolled ? "text-text-primary" : "text-white"
+                  isScrolled ? "text-main" : "text-white"
                 }`}
               >
                 {item.label}
               </Link>
             ))}
-{ctaButton.label && (
+            {ctaButton.label && (
               <Link
                 href={ctaButton.href}
-                className="bg-accent text-white px-6 py-3 rounded-btn text-sm font-semibold transition-colors duration-200 hover:bg-accent-dark ml-4"
+                className="bg-accent text-white px-6 py-3 rounded-btn text-sm font-semibold transition-all duration-200 hover:bg-[var(--color-accent-dark)] ml-4"
               >
                 {ctaButton.label}
               </Link>
             )}
           </nav>
-
-          {/* Hamburger Button (SP) */}
-          <button
-            className="lg:hidden w-11 h-11 flex items-center justify-center"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-          >
-            <div className="relative w-6 h-6">
-              <span
-                className={`absolute left-0 w-6 h-0.5 transition-all duration-300 ${
-                  isScrolled ? "bg-text-primary" : "bg-white"
-                } ${isMenuOpen ? "top-[11px] rotate-45" : "top-1"}`}
-              />
-              <span
-                className={`absolute left-0 top-[11px] w-6 h-0.5 transition-all duration-300 ${
-                  isScrolled ? "bg-text-primary" : "bg-white"
-                } ${isMenuOpen ? "opacity-0" : "opacity-100"}`}
-              />
-              <span
-                className={`absolute left-0 w-6 h-0.5 transition-all duration-300 ${
-                  isScrolled ? "bg-text-primary" : "bg-white"
-                } ${isMenuOpen ? "top-[11px] -rotate-45" : "top-[19px]"}`}
-              />
-            </div>
-          </button>
         </div>
       </header>
 
@@ -111,8 +84,8 @@ export default function Header() {
         <div className="flex items-center justify-between h-full px-4">
           <Link href="/" className="flex items-center">
             <Image
-              src={images.logo || "/images/logo.png"}
-              alt={company.name || "会社ロゴ"}
+              src={branding.logo || "/images/logo.svg"}
+              alt={branding.logoAlt || siteInfo.name}
               width={150}
               height={38}
             />
@@ -126,17 +99,17 @@ export default function Header() {
           >
             <div className="relative w-6 h-6">
               <span
-                className={`absolute left-0 w-6 h-0.5 bg-text-primary transition-all duration-300 ${
+                className={`absolute left-0 w-6 h-0.5 bg-main transition-all duration-300 ${
                   isMenuOpen ? "top-[11px] rotate-45" : "top-1"
                 }`}
               />
               <span
-                className={`absolute left-0 top-[11px] w-6 h-0.5 bg-text-primary transition-all duration-300 ${
+                className={`absolute left-0 top-[11px] w-6 h-0.5 bg-main transition-all duration-300 ${
                   isMenuOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
               <span
-                className={`absolute left-0 w-6 h-0.5 bg-text-primary transition-all duration-300 ${
+                className={`absolute left-0 w-6 h-0.5 bg-main transition-all duration-300 ${
                   isMenuOpen ? "top-[11px] -rotate-45" : "top-[19px]"
                 }`}
               />
@@ -165,17 +138,17 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="block h-14 leading-[56px] px-6 text-lg text-text-primary border-b border-gray-100 transition-colors hover:text-accent"
+              className="block h-14 leading-[56px] px-6 text-lg text-main border-b border-gray-100 transition-colors hover:text-accent"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.label}
             </Link>
           ))}
-{ctaButton.label && (
+          {ctaButton.label && (
             <div className="px-6 py-6">
               <Link
                 href={ctaButton.href}
-                className="block w-full h-12 leading-[48px] text-center bg-accent text-white rounded-btn font-semibold transition-colors hover:bg-accent-dark"
+                className="block w-full h-12 leading-[48px] text-center bg-accent text-white rounded-btn font-semibold transition-colors hover:bg-[var(--color-accent-dark)]"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {ctaButton.label}
@@ -186,7 +159,7 @@ export default function Header() {
             <div className="px-6 pt-4">
               <a
                 href={`tel:${contact.phoneTel || contact.phone.replace(/-/g, "")}`}
-                className="text-sm text-text-secondary"
+                className="text-sm text-muted"
               >
                 TEL: {contact.phoneFormatted || contact.phone}
               </a>

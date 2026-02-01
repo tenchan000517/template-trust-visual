@@ -1,46 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Brand Colors */
-  --color-navy: #1a3a5c;
-  --color-navy-dark: #152e4a;
-  --color-accent: #e67635;
-  --color-accent-dark: #d56025;
+  /* ============================================
+     Trust Visual - Brand Colors
+     Deep Forest Green + Terracotta Accent
+     ============================================ */
+
+  /* Main Colors - Deep Forest Green */
+  --color-main: #1e3a2f;
+  --color-main-light: #2d4a3e;
+  --color-main-dark: #152b22;
+
+  /* Accent Colors - Terracotta */
+  --color-accent: #c45c3e;
+  --color-accent-light: #d86d4f;
+  --color-accent-dark: #b04d30;
+  --color-accent-bg: rgba(196, 92, 62, 0.1);
+
+  /* Neutral / Background Colors */
+  --color-bg-white: #ffffff;
+  --color-bg-offwhite: #f8f8f8;
+  --color-bg-warm: #f0ebe6;
+  --color-bg-light-gray: #e8e8e8;
 
   /* Text Colors */
-  --color-text-primary: #333333;
-  --color-text-secondary: #666666;
-  --color-text-muted: #999999;
-
-  /* Background Colors */
-  --color-bg-light: #e0e0e0;
-  --color-bg-white: #ffffff;
+  --color-text-primary: #1e3a2f;
+  --color-text-secondary: #3d5a4c;
+  --color-text-muted: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-text-white: #ffffff;
 
   /* Border Colors */
   --color-border: #e0e0e0;
+  --color-border-light: #f0f0f0;
 
-  /* Font Family */
-  --font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  /* ============================================
+     Typography
+     ============================================ */
 
-  /* Spacing */
+  /* Font Families (next/font CSS変数を使用) */
+  --font-sans: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  --font-numbers: var(--font-inter), "Helvetica Neue", sans-serif;
+
+  /* Stat Number Sizes */
+  --stat-number-size-lg: 96px;
+  --stat-number-size-md: 48px;
+  --stat-number-size-sm: 32px;
+
+  /* ============================================
+     Spacing
+     ============================================ */
+
   --spacing-section-y: 120px;
   --spacing-section-y-sp: 80px;
+  --spacing-section-y-compact: 80px;
+  --spacing-section-y-compact-sp: 60px;
 
-  /* Max Width */
+  /* ============================================
+     Layout
+     ============================================ */
+
   --width-container: 1200px;
   --width-narrow: 800px;
 
+  /* ============================================
+     Effects
+     ============================================ */
+
   /* Border Radius */
   --radius-btn: 4px;
+  --radius-card: 8px;
+  --radius-badge: 4px;
 
-  /* Box Shadow */
+  /* Box Shadows */
   --shadow-header: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
   --shadow-fixed-cta: 0 -2px 8px rgba(0, 0, 0, 0.1);
+
+  /* ============================================
+     Trust Visual Specific
+     ============================================ */
+
+  --testimonial-card-bg: #f0ebe6;
+  --testimonial-quote-size: 64px;
+  --works-grid-gap: 16px;
+  --works-overlay-gradient: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+  --evidence-badge-bg: rgba(196, 92, 62, 0.1);
+  --evidence-badge-radius: 4px;
 }
 
-/* Base styles */
+/* ============================================
+   Base Styles
+   ============================================ */
+
 html {
   scroll-behavior: smooth;
 }
@@ -51,9 +104,13 @@ body {
   background-color: var(--color-bg-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.8;
 }
 
-/* Component Classes */
+/* ============================================
+   Button Components
+   ============================================ */
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -64,11 +121,12 @@ body {
   border-radius: var(--radius-btn);
   font-weight: 600;
   font-size: 1rem;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
   background-color: var(--color-accent-dark);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -76,16 +134,18 @@ body {
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  color: var(--color-navy);
-  border: 1px solid var(--color-navy);
+  color: var(--color-main);
+  border: 1px solid var(--color-main);
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-btn);
   font-size: 1rem;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .btn-secondary:hover {
-  background-color: rgba(26, 58, 92, 0.05);
+  background-color: var(--color-main);
+  color: white;
 }
 
 .btn-outline-white {
@@ -98,18 +158,41 @@ body {
   padding: 1rem 2rem;
   border-radius: var(--radius-btn);
   font-size: 1rem;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .btn-outline-white:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: var(--color-main);
+  padding: 1rem 2rem;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-white:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   Text Link Components
+   ============================================ */
+
 .text-link {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: var(--color-navy);
+  color: var(--color-main);
   font-weight: 600;
   transition: color 0.2s;
 }
@@ -121,6 +204,10 @@ body {
 .text-link::after {
   content: "→";
 }
+
+/* ============================================
+   Section Components
+   ============================================ */
 
 .section-label {
   font-size: 0.875rem;
@@ -142,7 +229,191 @@ body {
   }
 }
 
-/* Custom Utility Classes */
+.section-padding-compact {
+  padding-top: var(--spacing-section-y-compact-sp);
+  padding-bottom: var(--spacing-section-y-compact-sp);
+}
+
+@media (min-width: 1024px) {
+  .section-padding-compact {
+    padding-top: var(--spacing-section-y-compact);
+    padding-bottom: var(--spacing-section-y-compact);
+  }
+}
+
+/* ============================================
+   Trust Visual - Stat Number Styles
+   ============================================ */
+
+.stat-number {
+  font-family: var(--font-numbers);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-main);
+  font-feature-settings: "tnum";
+}
+
+.stat-number--lg {
+  font-size: 56px;
+}
+
+@media (min-width: 1024px) {
+  .stat-number--lg {
+    font-size: var(--stat-number-size-lg);
+  }
+}
+
+.stat-number--md {
+  font-size: 40px;
+}
+
+@media (min-width: 1024px) {
+  .stat-number--md {
+    font-size: var(--stat-number-size-md);
+  }
+}
+
+.stat-number--sm {
+  font-size: 24px;
+}
+
+@media (min-width: 1024px) {
+  .stat-number--sm {
+    font-size: var(--stat-number-size-sm);
+  }
+}
+
+.stat-unit {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-left: 4px;
+}
+
+.stat-unit--lg {
+  font-size: 18px;
+}
+
+@media (min-width: 1024px) {
+  .stat-unit--lg {
+    font-size: 24px;
+  }
+}
+
+.stat-unit--md {
+  font-size: 14px;
+}
+
+@media (min-width: 1024px) {
+  .stat-unit--md {
+    font-size: 18px;
+  }
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: 8px;
+}
+
+@media (min-width: 1024px) {
+  .stat-label {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+}
+
+/* ============================================
+   Trust Visual - Evidence Badge
+   ============================================ */
+
+.evidence-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 8px 16px;
+  background-color: var(--evidence-badge-bg);
+  border-radius: var(--evidence-badge-radius);
+}
+
+.evidence-badge__number {
+  font-family: var(--font-numbers);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.evidence-badge__unit {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+
+.evidence-badge__label {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-left: 8px;
+}
+
+/* ============================================
+   Trust Visual - Client Logos
+   ============================================ */
+
+.client-logo {
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.client-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* ============================================
+   Trust Visual - Testimonial Quote
+   ============================================ */
+
+.testimonial-quote::before {
+  content: "\201C";
+  font-family: Georgia, serif;
+  font-size: var(--testimonial-quote-size);
+  color: var(--color-accent);
+  opacity: 0.3;
+  line-height: 1;
+  position: absolute;
+  top: -20px;
+  left: -10px;
+}
+
+/* ============================================
+   Trust Visual - Works Grid Overlay
+   ============================================ */
+
+.works-overlay {
+  background: var(--works-overlay-gradient);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.works-item:hover .works-overlay {
+  opacity: 1;
+}
+
+.works-item:hover .works-image {
+  transform: scale(1.03);
+}
+
+.works-image {
+  transition: transform 0.4s ease;
+}
+
+/* ============================================
+   Custom Utility Classes
+   ============================================ */
+
 @utility max-w-container {
   max-width: var(--width-container);
 }
@@ -151,38 +422,94 @@ body {
   max-width: var(--width-narrow);
 }
 
-@utility bg-navy {
-  background-color: var(--color-navy);
+@utility bg-main {
+  background-color: var(--color-main);
+}
+
+@utility bg-main-light {
+  background-color: var(--color-main-light);
 }
 
 @utility bg-accent {
   background-color: var(--color-accent);
 }
 
-@utility bg-bg-light {
-  background-color: var(--color-bg-light);
+@utility bg-offwhite {
+  background-color: var(--color-bg-offwhite);
 }
 
-@utility text-navy {
-  color: var(--color-navy);
+@utility bg-warm {
+  background-color: var(--color-bg-warm);
+}
+
+@utility bg-light-gray {
+  background-color: var(--color-bg-light-gray);
+}
+
+@utility text-main {
+  color: var(--color-main);
 }
 
 @utility text-accent {
   color: var(--color-accent);
 }
 
-@utility text-text-primary {
+@utility text-primary {
   color: var(--color-text-primary);
 }
 
-@utility text-text-secondary {
+@utility text-secondary {
   color: var(--color-text-secondary);
+}
+
+@utility text-muted {
+  color: var(--color-text-muted);
 }
 
 @utility shadow-header {
   box-shadow: var(--shadow-header);
 }
 
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
 @utility rounded-btn {
   border-radius: var(--radius-btn);
+}
+
+@utility rounded-card {
+  border-radius: var(--radius-card);
+}
+
+/* ============================================
+   Animation Keyframes
+   ============================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-logo-scroll {
+  animation: logoScroll 30s linear infinite;
 }
