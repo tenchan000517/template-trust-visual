@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { seo, siteInfo, branding, contact, company } from "@/lib/site";
+import { seo, siteInfo, branding, contact, colors } from "@/lib/site";
 
 // next/font で最適化されたフォント読み込み
 const inter = Inter({
@@ -55,6 +55,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteInfo.url,
   },
+};
+
+// Viewport設定（themeColor）
+export const viewport: Viewport = {
+  themeColor: colors.main,
 };
 
 // 構造化データ（JSON-LD）
