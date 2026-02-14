@@ -92,6 +92,133 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 }
 ```
 
+### 2-4. 全ページ標準 layout.tsx テンプレート（静的ページ）
+
+各ページの `layout.tsx` には以下の項目を必ず設定する。
+
+```typescript
+import type { Metadata } from "next";
+import { seo, company } from "@/lib/site";
+
+export const metadata: Metadata = {
+  // === 基本SEO ===
+  title: "ページタイトル | Page Title",
+  description: "ページの説明文。検索結果に表示される重要なテキスト。120-160文字推奨。",
+
+  // === OpenGraph (SNS共有時) ===
+  openGraph: {
+    title: `ページタイトル${seo.titleSuffix}`,
+    description: "ページの説明文",
+    url: `${seo.siteUrl}/page-path`,
+    siteName: company.name,
+    locale: "ja_JP",
+    type: "website", // article, product等も可
+  },
+
+  // === Twitter Card ===
+  twitter: {
+    card: "summary_large_image",
+    title: `ページタイトル${seo.titleSuffix}`,
+    description: "ページの説明文",
+  },
+
+  // === Canonical URL (重複コンテンツ対策) ===
+  alternates: {
+    canonical: "/page-path",
+  },
+
+  // === LLMO対応 (AI検索エンジン最適化) ===
+  other: {
+    "ai:summary": "このページの内容を1-2文で要約。AIが参照する簡潔な説明。",
+    "ai:topics": "トピック1, トピック2, トピック3",
+  },
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}
+```
+
+**各項目の説明:**
+
+| 項目 | 必須 | 説明 |
+|------|------|------|
+| title | ◎ | ページタイトル（30-60文字推奨） |
+| description | ◎ | ページ説明文（120-160文字推奨） |
+| openGraph | ◎ | SNS共有時の表示設定 |
+| twitter | ○ | Twitter Card設定 |
+| alternates.canonical | ◎ | 正規URL（重複コンテンツ対策） |
+| other["ai:summary"] | ○ | LLMO用：AI要約テキスト |
+| other["ai:topics"] | ○ | LLMO用：関連トピック |
+
+### 2-5. 動的ページ用 layout.tsx（generateMetadata）
+
+`[slug]` などの動的ルートでは `generateMetadata` を使用する。
+
+```typescript
+import type { Metadata } from "next";
+import { seo, company } from "@/lib/site";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  // データ取得ロジック
+  const item = getItemBySlug(slug);
+
+  if (!item) {
+    return {
+      title: "ページが見つかりません",
+      robots: { index: false },
+    };
+  }
+
+  const title = `${item.title} | カテゴリ名`;
+  const description = item.description || `${item.title}の詳細ページ`;
+
+  return {
+    // === 基本SEO ===
+    title: title,
+    description: description,
+
+    // === OpenGraph ===
+    openGraph: {
+      title: `${title}${seo.titleSuffix}`,
+      description: description,
+      url: `${seo.siteUrl}/items/${slug}`,
+      siteName: company.name,
+      locale: "ja_JP",
+      type: "article",
+      images: item.image ? [{ url: item.image, alt: item.title }] : undefined,
+    },
+
+    // === Twitter Card ===
+    twitter: {
+      card: "summary_large_image",
+      title: `${title}${seo.titleSuffix}`,
+      description: description,
+    },
+
+    // === Canonical URL ===
+    alternates: {
+      canonical: `/items/${slug}`,
+    },
+
+    // === LLMO対応 ===
+    other: {
+      "ai:summary": description,
+      "ai:topics": `${item.category}, 詳細, 関連キーワード`,
+    },
+  };
+}
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return children;
+}
+```
+
 ---
 
 ## 3. JSON-LD 構造化データ
@@ -315,6 +442,41 @@ JSON-LD の `knowsAbout` に加え、本文中にも専門分野を明記する�
 - 従業員数
 - 代表者名
 
+### 7-4. LLMO用メタデータ（ai:summary, ai:topics）
+
+各ページの `layout.tsx` に LLMO 用メタデータを設定する。
+
+```typescript
+export const metadata: Metadata = {
+  // ... 他のメタデータ ...
+
+  // === LLMO対応 (AI検索エンジン最適化) ===
+  other: {
+    // AI要約用の簡潔な説明（1-2文、50-100文字程度）
+    "ai:summary": "このページの内容を簡潔に要約したテキスト。",
+
+    // ページの主要トピック（カンマ区切り、3-5個程度）
+    "ai:topics": "トピック1, トピック2, トピック3",
+  },
+};
+```
+
+**設定のポイント:**
+
+| フィールド | 目的 | 例 |
+|-----------|------|-----|
+| ai:summary | AIがページ内容を理解するための要約 | "○○株式会社の採用情報ページ。募集職種、待遇、選考フローを掲載。" |
+| ai:topics | ページの主要キーワード・トピック | "採用情報, 求人, 募集職種, 福利厚生" |
+
+**各ページタイプ別の例:**
+
+| ページ | ai:summary例 | ai:topics例 |
+|--------|-------------|-------------|
+| 会社概要 | "○○株式会社の企業情報。沿革、理念、代表メッセージを掲載。" | "会社概要, 企業理念, 沿革, 代表挨拶" |
+| サービス | "○○株式会社の事業内容。主要サービスと特長を紹介。" | "事業内容, サービス, ソリューション" |
+| お問い合わせ | "○○株式会社へのお問い合わせページ。" | "お問い合わせ, 相談, 見積り" |
+| 採用情報 | "○○株式会社の採用情報。募集職種と応募方法。" | "採用情報, 求人, 募集, 応募" |
+
 ---
 
 ## 8. チェックリスト
@@ -328,12 +490,16 @@ JSON-LD の `knowsAbout` に加え、本文中にも専門分野を明記する�
 
 - [ ] `public/robots.txt` が存在するか
 - [ ] `src/app/sitemap.ts` が存在するか
+- [ ] 全ページに `layout.tsx` が存在するか
 - [ ] 全ページに metadata（title, description）が設定されているか
+- [ ] 全ページに `alternates.canonical` が設定されているか
+- [ ] 全ページに OpenGraph メタデータが設定されているか
+- [ ] 全ページに Twitter Card メタデータが設定されているか
+- [ ] 全ページに LLMO用メタデータ（ai:summary, ai:topics）が設定されているか
 - [ ] JSON-LD が layout.tsx に設置されているか
 - [ ] JSON-LD の @type が業種に適しているか
 - [ ] 見出し構造が h1 → h2 → h3 の順序を守っているか
 - [ ] 全画像に適切な alt 属性があるか
-- [ ] OGP 設定が完了しているか
 
 ### 8-3. 検証
 
@@ -373,3 +539,4 @@ https://search.google.com/test/rich-results
 | 日付 | 内容 |
 |------|------|
 | 初版 | 本ガイド作成 |
+| 2025-02 | canonical URL、LLMO用メタデータ（ai:summary, ai:topics）、generateMetadataパターン追加 |
