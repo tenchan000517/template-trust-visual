@@ -9,9 +9,9 @@ import {
   TestimonialCard,
   WorksGrid,
   CTASection,
-  FadeInSection,
-  StaggerChildren,
 } from "@/components/trust-visual";
+// 新しいスクロールアニメーションコンポーネント（waitForScrollTop対応）
+import { FadeInUp, StaggerContainer, HeroBackground, AnimatedLink } from "@/components/animations";
 
 // 画像パス
 const IMAGES = {
@@ -36,7 +36,7 @@ export default function Home() {
         {/* PC: 左右分割 */}
         <div className="hidden lg:flex min-h-screen">
           {/* 左側: メインビジュアル */}
-          <div className="relative w-[55%]">
+          <HeroBackground className="relative w-[55%]">
             <Image
               src={IMAGES.hero}
               alt="メインビジュアル"
@@ -46,7 +46,7 @@ export default function Home() {
             />
             {/* グラデーションオーバーレイ */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/30" />
-          </div>
+          </HeroBackground>
 
           {/* 右側: テキストエリア */}
           <div className="w-[45%] bg-offwhite flex flex-col justify-center px-10 xl:px-16 py-20">
@@ -81,7 +81,7 @@ export default function Home() {
         {/* SP: 縦積み */}
         <div className="lg:hidden">
           {/* 上部: メインビジュアル */}
-          <div className="relative h-[40vh]">
+          <HeroBackground className="relative h-[40vh]">
             <Image
               src={IMAGES.hero}
               alt="メインビジュアル"
@@ -89,7 +89,7 @@ export default function Home() {
               className="object-cover"
               priority
             />
-          </div>
+          </HeroBackground>
 
           {/* 下部: テキストエリア */}
           <div className="bg-offwhite px-5 py-10">
@@ -173,16 +173,16 @@ export default function Home() {
       <section className="section-padding bg-white">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <FadeInSection>
+          <FadeInUp>
             <h2 className="text-2xl lg:text-4xl font-bold text-main text-center mb-12 lg:mb-16">
               選ばれる3つの理由
             </h2>
-          </FadeInSection>
+          </FadeInUp>
 
           {/* 理由カード */}
-          <StaggerChildren
+          <StaggerContainer
             className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-10"
-            staggerDelay={150}
+            staggerDelay={0.15}
           >
             {reasons.slice(0, 3).map((reason) => (
               <div key={reason.id} className="text-center lg:text-left">
@@ -215,16 +215,16 @@ export default function Home() {
                 </div>
               </div>
             ))}
-          </StaggerChildren>
+          </StaggerContainer>
 
           {/* 詳しく見るリンク */}
-          <FadeInSection delay={400}>
+          <FadeInUp delay={0.4}>
             <div className="text-center mt-12 lg:mt-16">
-              <Link href="/why" className="text-link">
+              <AnimatedLink href="/why">
                 選ばれる理由を詳しく見る
-              </Link>
+              </AnimatedLink>
             </div>
-          </FadeInSection>
+          </FadeInUp>
         </div>
       </section>
 
@@ -234,32 +234,32 @@ export default function Home() {
       <section className="py-16 lg:py-24 bg-offwhite">
         <div className="max-w-[90%] mx-auto">
           {/* 見出し */}
-          <FadeInSection className="mb-8 lg:mb-12 px-4">
+          <FadeInUp className="mb-8 lg:mb-12 px-4">
             <h2 className="text-2xl lg:text-4xl font-bold text-main mb-4">
               {works.heading}
             </h2>
             <p className="text-sm lg:text-base text-secondary">
               {works.subHeading}
             </p>
-          </FadeInSection>
+          </FadeInUp>
 
           {/* 実績グリッド */}
-          <FadeInSection delay={200}>
+          <FadeInUp delay={0.2}>
             <WorksGrid
               works={works.items.filter((w) => w.featured).slice(0, 6)}
               columns={3}
               showOverlay={true}
             />
-          </FadeInSection>
+          </FadeInUp>
 
           {/* もっと見るリンク */}
-          <FadeInSection delay={400}>
+          <FadeInUp delay={0.4}>
             <div className="text-right mt-8 lg:mt-10 px-4">
-              <Link href="/works" className="text-link">
+              <AnimatedLink href="/works">
                 実績をもっと見る
-              </Link>
+              </AnimatedLink>
             </div>
-          </FadeInSection>
+          </FadeInUp>
         </div>
       </section>
 
@@ -269,16 +269,16 @@ export default function Home() {
       <section className="section-padding bg-white">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <FadeInSection>
+          <FadeInUp>
             <h2 className="text-2xl lg:text-4xl font-bold text-main text-center mb-12 lg:mb-16">
               {testimonials.heading}
             </h2>
-          </FadeInSection>
+          </FadeInUp>
 
           {/* お客様の声カード */}
-          <StaggerChildren
+          <StaggerContainer
             className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8"
-            staggerDelay={150}
+            staggerDelay={0.15}
           >
             {testimonials.items
               .filter((t) => t.featured)
@@ -294,16 +294,16 @@ export default function Home() {
                   variant="summary"
                 />
               ))}
-          </StaggerChildren>
+          </StaggerContainer>
 
           {/* もっと見るリンク */}
-          <FadeInSection delay={400}>
+          <FadeInUp delay={0.4}>
             <div className="text-center mt-12 lg:mt-16">
-              <Link href="/voice" className="text-link">
+              <AnimatedLink href="/voice">
                 お客様の声をもっと見る
-              </Link>
+              </AnimatedLink>
             </div>
-          </FadeInSection>
+          </FadeInUp>
         </div>
       </section>
 

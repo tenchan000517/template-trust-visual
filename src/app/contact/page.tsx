@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { contact } from "@/lib/site";
+import { FadeInUp } from "@/components/animations";
 
 // フォームの状態
 interface FormData {
@@ -185,24 +186,28 @@ export default function ContactPage() {
       <section className="relative min-h-[30vh] lg:min-h-[30vh] flex items-center justify-center bg-offwhite">
         <div className="max-w-container mx-auto px-4 lg:px-8 py-20 lg:py-24 text-center">
           {/* ページタイトル */}
-          <h1 className="text-4xl lg:text-[56px] font-bold text-main mb-8">
-            お問い合わせ
-          </h1>
+          <FadeInUp>
+            <h1 className="text-4xl lg:text-[56px] font-bold text-main mb-8">
+              お問い合わせ
+            </h1>
+          </FadeInUp>
 
           {/* 安心ポイント */}
-          <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12">
-            {["ご相談無料", "24時間受付", "1営業日以内にご返信"].map(
-              (point, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 text-main"
-                >
-                  <span className="text-accent font-bold">✓</span>
-                  <span className="text-base">{point}</span>
-                </div>
-              )
-            )}
-          </div>
+          <FadeInUp delay={100}>
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-4 lg:gap-12">
+              {["ご相談無料", "24時間受付", "1営業日以内にご返信"].map(
+                (point, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 text-main"
+                  >
+                    <span className="text-accent font-bold">✓</span>
+                    <span className="text-base">{point}</span>
+                  </div>
+                )
+              )}
+            </div>
+          </FadeInUp>
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { company, trustVisual, contact, seo } from "@/lib/site";
 import { CertificationBadge } from "@/components/trust-visual";
+import { FadeInUp, FadeInImage, HeroBackground, StaggerContainer } from "@/components/animations";
 
 // 画像パス（site.jsonから取得される場合もあるが、フォールバック用）
 const IMAGES = {
@@ -24,7 +25,7 @@ export default function AboutPage() {
           ============================================ */}
       <section className="relative min-h-[50vh] lg:min-h-[50vh] flex items-center justify-center overflow-hidden">
         {/* 背景画像 */}
-        <div className="absolute inset-0">
+        <HeroBackground className="absolute inset-0">
           <Image
             src={company.heroImage || IMAGES.exterior}
             alt="会社外観"
@@ -33,19 +34,23 @@ export default function AboutPage() {
             priority
           />
           <div className="absolute inset-0 bg-black/40" />
-        </div>
+        </HeroBackground>
 
         {/* コンテンツ */}
         <div className="relative z-10 text-center px-4">
           {/* サブタイトル */}
-          <p className="text-sm lg:text-base text-white/80 tracking-widest mb-4">
-            COMPANY
-          </p>
+          <FadeInUp delay={200}>
+            <p className="text-sm lg:text-base text-white/80 tracking-widest mb-4">
+              COMPANY
+            </p>
+          </FadeInUp>
 
           {/* ページタイトル */}
-          <h1 className="text-4xl lg:text-[56px] font-bold text-white">
-            会社概要
-          </h1>
+          <FadeInUp delay={300}>
+            <h1 className="text-4xl lg:text-[56px] font-bold text-white">
+              会社概要
+            </h1>
+          </FadeInUp>
         </div>
       </section>
 
@@ -55,27 +60,31 @@ export default function AboutPage() {
       <section className="section-padding bg-white">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <h2 className="text-2xl lg:text-[32px] font-bold text-main mb-8 lg:mb-12">
-            基本情報
-          </h2>
+          <FadeInUp>
+            <h2 className="text-2xl lg:text-[32px] font-bold text-main mb-8 lg:mb-12">
+              基本情報
+            </h2>
+          </FadeInUp>
 
           {/* テーブル */}
-          <div className="max-w-3xl">
-            <table className="w-full">
-              <tbody>
-                {company.info.map((item, index) => (
-                  <tr key={index} className="border-b border-gray-200">
-                    <th className="py-4 lg:py-5 pr-4 text-left text-sm font-semibold text-muted w-1/4 lg:w-1/5 align-top">
-                      {item.label}
-                    </th>
-                    <td className="py-4 lg:py-5 text-base text-main leading-relaxed">
-                      {item.value}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <FadeInUp delay={100}>
+            <div className="max-w-3xl">
+              <table className="w-full">
+                <tbody>
+                  {company.info.map((item, index) => (
+                    <tr key={index} className="border-b border-gray-200">
+                      <th className="py-4 lg:py-5 pr-4 text-left text-sm font-semibold text-muted w-1/4 lg:w-1/5 align-top">
+                        {item.label}
+                      </th>
+                      <td className="py-4 lg:py-5 text-base text-main leading-relaxed">
+                        {item.value}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FadeInUp>
         </div>
       </section>
 
@@ -86,21 +95,24 @@ export default function AboutPage() {
         <section className="section-padding bg-offwhite">
           <div className="max-w-container mx-auto px-4 lg:px-8">
             {/* 見出し */}
-            <h2 className="text-2xl lg:text-[32px] font-bold text-main text-center mb-8 lg:mb-12">
-              資格・認証
-            </h2>
+            <FadeInUp>
+              <h2 className="text-2xl lg:text-[32px] font-bold text-main text-center mb-8 lg:mb-12">
+                資格・認証
+              </h2>
+            </FadeInUp>
 
             {/* バッジグリッド */}
-            <div className="flex flex-wrap justify-center gap-8 lg:gap-12">
+            <StaggerContainer className="flex flex-wrap justify-center gap-8 lg:gap-12">
               {certifications.map((cert) => (
-                <CertificationBadge
-                  key={cert.id}
-                  image={cert.image || ""}
-                  name={cert.name || ""}
-                  note={cert.note}
-                />
+                <FadeInUp key={cert.id}>
+                  <CertificationBadge
+                    image={cert.image || ""}
+                    name={cert.name || ""}
+                    note={cert.note}
+                  />
+                </FadeInUp>
               ))}
-            </div>
+            </StaggerContainer>
           </div>
         </section>
       )}
@@ -113,39 +125,46 @@ export default function AboutPage() {
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
             {/* 代表者写真 */}
             <div className="w-full lg:w-[40%] flex justify-center lg:justify-start">
-              <div className="relative w-[80%] max-w-[400px] aspect-[3/4] rounded-lg overflow-hidden">
-                <Image
-                  src={company.ceoMessage.photo || IMAGES.ceo}
-                  alt={`${company.ceoMessage.name}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <FadeInImage
+                src={company.ceoMessage.photo || IMAGES.ceo}
+                alt={`${company.ceoMessage.name}`}
+                width={400}
+                height={533}
+                direction="left"
+                containerClassName="relative w-[80%] max-w-[400px] aspect-[3/4] rounded-lg overflow-hidden"
+                className="object-cover w-full h-full"
+              />
             </div>
 
             {/* メッセージ */}
             <div className="w-full lg:w-[60%]">
               {/* 見出し */}
-              <h2 className="text-xl lg:text-[28px] font-bold text-main mb-6 lg:mb-8">
-                {company.ceoMessage.heading}
-              </h2>
+              <FadeInUp>
+                <h2 className="text-xl lg:text-[28px] font-bold text-main mb-6 lg:mb-8">
+                  {company.ceoMessage.heading}
+                </h2>
+              </FadeInUp>
 
               {/* メッセージ本文 */}
-              <div className="space-y-6">
-                {company.ceoMessage.message.split("\n\n").map((paragraph, index) => (
-                  <p key={index} className="text-base lg:text-lg text-main leading-loose">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
+              <FadeInUp delay={100}>
+                <div className="space-y-6">
+                  {company.ceoMessage.message.split("\n\n").map((paragraph, index) => (
+                    <p key={index} className="text-base lg:text-lg text-main leading-loose">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </FadeInUp>
 
               {/* 署名 */}
-              <div className="text-right mt-10">
-                <p className="text-sm text-muted">{company.ceoMessage.title}</p>
-                <p className="text-xl lg:text-2xl font-medium text-main mt-1">
-                  {company.ceoMessage.name}
-                </p>
-              </div>
+              <FadeInUp delay={200}>
+                <div className="text-right mt-10">
+                  <p className="text-sm text-muted">{company.ceoMessage.title}</p>
+                  <p className="text-xl lg:text-2xl font-medium text-main mt-1">
+                    {company.ceoMessage.name}
+                  </p>
+                </div>
+              </FadeInUp>
             </div>
           </div>
         </div>
@@ -157,13 +176,15 @@ export default function AboutPage() {
       <section className="section-padding bg-offwhite">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <h2 className="text-2xl lg:text-[32px] font-bold text-main mb-8 lg:mb-12">
-            {company.access.heading}
-          </h2>
+          <FadeInUp>
+            <h2 className="text-2xl lg:text-[32px] font-bold text-main mb-8 lg:mb-12">
+              {company.access.heading}
+            </h2>
+          </FadeInUp>
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* Google Maps */}
-            <div className="w-full lg:w-[60%]">
+            <FadeInUp delay={100} className="w-full lg:w-[60%]">
               <div className="relative w-full h-[300px] lg:h-[400px] rounded-lg overflow-hidden">
                 <iframe
                   src={contact.googleMapsEmbedUrl}
@@ -174,10 +195,10 @@ export default function AboutPage() {
                   title="会社所在地"
                 />
               </div>
-            </div>
+            </FadeInUp>
 
             {/* アクセス情報 */}
-            <div className="w-full lg:w-[40%]">
+            <FadeInUp delay={200} className="w-full lg:w-[40%]">
               {/* 住所 */}
               <div className="mb-6">
                 <h3 className="text-sm font-semibold text-muted mb-2">住所</h3>
@@ -215,7 +236,7 @@ export default function AboutPage() {
                 </a>
                 <p className="text-sm text-muted mt-1">{contact.hours}</p>
               </div>
-            </div>
+            </FadeInUp>
           </div>
         </div>
       </section>

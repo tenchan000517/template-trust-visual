@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { trustVisual, cta, seo } from "@/lib/site";
 import { EvidenceBadge, CTASection } from "@/components/trust-visual";
+import { FadeInUp, FadeInImage, StaggerContainer } from "@/components/animations";
 
 // 画像パス（site.jsonから取得される場合もあるが、フォールバック用）
 const IMAGES = {
@@ -24,14 +25,18 @@ export default function ServicePage() {
       <section className="relative min-h-[35vh] lg:min-h-[35vh] flex items-center justify-center bg-offwhite">
         <div className="max-w-container mx-auto px-4 lg:px-8 py-20 lg:py-24 text-center">
           {/* ページタイトル */}
-          <h1 className="text-4xl lg:text-[56px] font-bold text-main mb-6">
-            {services.heading}
-          </h1>
+          <FadeInUp>
+            <h1 className="text-4xl lg:text-[56px] font-bold text-main mb-6">
+              {services.heading}
+            </h1>
+          </FadeInUp>
 
           {/* サービス概要 */}
-          <p className="text-base lg:text-lg text-secondary max-w-[600px] mx-auto leading-relaxed">
-            {services.description}
-          </p>
+          <FadeInUp delay={100}>
+            <p className="text-base lg:text-lg text-secondary max-w-[600px] mx-auto leading-relaxed">
+              {services.description}
+            </p>
+          </FadeInUp>
         </div>
       </section>
 
@@ -51,18 +56,19 @@ export default function ServicePage() {
             >
               {/* サービス写真 */}
               <div className="w-full lg:w-1/2">
-                <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-                  <Image
-                    src={service.image || IMAGES.service}
-                    alt={service.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <FadeInImage
+                  src={service.image || IMAGES.service}
+                  alt={service.name}
+                  width={600}
+                  height={450}
+                  direction={index % 2 === 0 ? "left" : "right"}
+                  containerClassName="relative aspect-[4/3] rounded-lg overflow-hidden"
+                  className="object-cover w-full h-full"
+                />
               </div>
 
               {/* コンテンツ */}
-              <div className="w-full lg:w-1/2">
+              <FadeInUp delay={200} className="w-full lg:w-1/2">
                 {/* サービス名 */}
                 <h2 className="text-2xl lg:text-[32px] font-bold text-main mb-4 lg:mb-6">
                   {service.name}
@@ -101,7 +107,7 @@ export default function ServicePage() {
                     ))}
                   </div>
                 )}
-              </div>
+              </FadeInUp>
             </div>
           </div>
         </section>
@@ -113,26 +119,27 @@ export default function ServicePage() {
       <section className="section-padding bg-main">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <h2 className="text-2xl lg:text-[32px] font-bold text-white text-center mb-8 lg:mb-12">
-            {services.coverage.heading}
-          </h2>
+          <FadeInUp>
+            <h2 className="text-2xl lg:text-[32px] font-bold text-white text-center mb-8 lg:mb-12">
+              {services.coverage.heading}
+            </h2>
+          </FadeInUp>
 
           {/* カード */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {services.coverage.items.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 lg:p-8 rounded-lg text-center"
-              >
-                <h3 className="text-lg lg:text-xl font-bold text-main mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-base text-secondary leading-relaxed">
-                  {item.content}
-                </p>
-              </div>
+              <FadeInUp key={index}>
+                <div className="bg-white p-6 lg:p-8 rounded-lg text-center h-full">
+                  <h3 className="text-lg lg:text-xl font-bold text-main mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-base text-secondary leading-relaxed">
+                    {item.content}
+                  </p>
+                </div>
+              </FadeInUp>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
@@ -142,51 +149,57 @@ export default function ServicePage() {
       <section className="section-padding bg-offwhite">
         <div className="max-w-container mx-auto px-4 lg:px-8">
           {/* 見出し */}
-          <h2 className="text-2xl lg:text-[32px] font-bold text-main text-center mb-8 lg:mb-12">
-            {services.pricing.heading}
-          </h2>
+          <FadeInUp>
+            <h2 className="text-2xl lg:text-[32px] font-bold text-main text-center mb-8 lg:mb-12">
+              {services.pricing.heading}
+            </h2>
+          </FadeInUp>
 
           {/* テーブル */}
-          <div className="max-w-3xl mx-auto bg-white rounded-lg overflow-hidden shadow-sm">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-main text-white">
-                  <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
-                    サービス
-                  </th>
-                  <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
-                    料金目安
-                  </th>
-                  <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
-                    納期目安
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {services.pricing.items.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={index % 2 === 0 ? "bg-white" : "bg-offwhite"}
-                  >
-                    <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main font-medium">
-                      {item.service}
-                    </td>
-                    <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main">
-                      {item.price}
-                    </td>
-                    <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main">
-                      {item.leadTime}
-                    </td>
+          <FadeInUp delay={100}>
+            <div className="max-w-3xl mx-auto bg-white rounded-lg overflow-hidden shadow-sm">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-main text-white">
+                    <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
+                      サービス
+                    </th>
+                    <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
+                      料金目安
+                    </th>
+                    <th className="py-4 px-4 lg:px-6 text-left text-sm lg:text-base font-semibold">
+                      納期目安
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {services.pricing.items.map((item, index) => (
+                    <tr
+                      key={index}
+                      className={index % 2 === 0 ? "bg-white" : "bg-offwhite"}
+                    >
+                      <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main font-medium">
+                        {item.service}
+                      </td>
+                      <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main">
+                        {item.price}
+                      </td>
+                      <td className="py-4 px-4 lg:px-6 text-sm lg:text-base text-main">
+                        {item.leadTime}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </FadeInUp>
 
           {/* 注釈 */}
-          <p className="text-sm text-muted text-center mt-6 max-w-2xl mx-auto">
-            {services.pricing.note}
-          </p>
+          <FadeInUp delay={200}>
+            <p className="text-sm text-muted text-center mt-6 max-w-2xl mx-auto">
+              {services.pricing.note}
+            </p>
+          </FadeInUp>
         </div>
       </section>
 

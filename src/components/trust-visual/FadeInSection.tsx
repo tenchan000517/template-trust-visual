@@ -13,6 +13,20 @@ interface FadeInSectionProps {
   once?: boolean;
 }
 
+// スクロール位置が0になるまで待ち、さらに少し待機
+function waitForScrollTop(): Promise<void> {
+  return new Promise(resolve => {
+    const check = () => {
+      if (window.scrollY === 0) {
+        setTimeout(resolve, 100);
+      } else {
+        requestAnimationFrame(check);
+      }
+    };
+    check();
+  });
+}
+
 export default function FadeInSection({
   children,
   className = "",
@@ -28,27 +42,47 @@ export default function FadeInSection({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && (!once || !hasAnimated)) {
-            setTimeout(() => {
-              setIsVisible(true);
-              setHasAnimated(true);
-            }, delay);
-          } else if (!once && !entry.isIntersecting) {
-            setIsVisible(false);
-          }
-        });
-      },
-      { threshold, rootMargin: "-80px 0px" }
-    );
+    const element = ref.current;
+    if (!element) return;
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
     }
 
-    return () => observer.disconnect();
+    let observer: IntersectionObserver | null = null;
+    let cancelled = false;
+
+    waitForScrollTop().then(() => {
+      if (cancelled || !element) return;
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && (!once || !hasAnimated)) {
+              setTimeout(() => {
+                setIsVisible(true);
+                setHasAnimated(true);
+              }, delay);
+            } else if (!once && !entry.isIntersecting) {
+              setIsVisible(false);
+            }
+          });
+        },
+        { threshold, rootMargin: "-80px 0px" }
+      );
+
+      observer.observe(element);
+    });
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+    };
   }, [delay, threshold, once, hasAnimated]);
 
   const getTransform = () => {
